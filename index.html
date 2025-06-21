@@ -1,13 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Saad Jawed | Growth & CRM Strategist</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet"/>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Saad Jawed | Growth &amp; CRM Strategist
+  </title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&amp;display=swap" rel="stylesheet"/>
   <style>
-    :root {
+   :root {
       --bg: #0a0a0a;
       --text: #ffffff;
       --accent: #ffd700;
@@ -135,11 +136,10 @@
     }
     .testimonial-slider {
       display: flex;
-      animation: scroll 20s linear infinite;
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
       gap: 20px;
     }
-    @keyframes scroll {
-      0% { transform: translateX(0); }
+    
       100% { transform: translateX(-100%); }
     }
     .testimonial-card {
@@ -177,85 +177,186 @@
     footer a:hover {
       color: var(--accent);
     }
+  
+.testimonial-slider::-webkit-scrollbar {
+  display: none;
+}
+.testimonial-card {
+  scroll-snap-align: start;
+  flex: 0 0 300px;
+  margin-right: 16px;
+}
+@media (max-width: 768px) {
+  header h1 { font-size: 2.2rem; }
+  header p, .box, .testimonial-card p, .cta { font-size: 1rem; }
+  .grid { grid-template-columns: 1fr; }
+  section { padding: 40px 16px; }
+  .cta { padding: 0.75rem 1.5rem; font-size: 1rem; }
+}
   </style>
-</head>
-<body>
-
-<div id="cursor"></div>
-
-<nav>
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#metrics">Results</a>
-  <a href="#testimonials">Testimonials</a>
-  <a href="#contact">Contact</a>
-</nav>
-
-<header>
-  <h1>Saad Jawed</h1>
-  <p>Growth Marketer | Shopify & CRM Expert | Scaling Brands with Paid Ads</p>
-  <a class="cta" href="mailto:msaadjawed@hotmail.com">📧 Let's Talk</a>
-</header>
-
-<section id="about">
-  <div class="section-title">About Me</div>
-  <p style="font-size:1.3rem;">I help eCommerce brands grow from scratch to $100K+ using full-funnel ad strategies across Meta, TikTok & Snapchat, and advanced CRM automations in HubSpot & Klaviyo. I manage over $100K/month in ad spend, delivering consistent ROI, retention, and brand equity. Let's build your growth engine today.</p>
-</section>
-
-<section id="services">
-  <div class="section-title">Services</div>
-  <div class="grid">
-    <div class="box">📊 Meta, TikTok, Snapchat Ads (Cold & Retargeting)</div>
-    <div class="box">🛒 Shopify Store Setup, Optimization & Theme Edits</div>
-    <div class="box">📈 Conversion Tracking, CRO & Sales Funnel Setup</div>
-    <div class="box">📬 CRM Strategy: HubSpot, Klaviyo, Email/WhatsApp</div>
+ </head>
+ <body>
+  <div id="cursor">
   </div>
-</section>
-
-<section id="metrics">
-  <div class="section-title">Results & Metrics</div>
-  <div class="grid">
-    <div class="box">💰 $100K+ Monthly Ad Budget Managed</div>
-    <div class="box">📦 $500K+ Revenue Generated for Clients</div>
-    <div class="box">🚀 3.1x ROAS on Cold Traffic Campaigns</div>
-    <div class="box">📊 45% Increase in Retention via CRM Automation</div>
-  </div>
-</section>
-
-<section id="testimonials">
-  <div class="section-title">Client Testimonials</div>
-  <div class="testimonial-slider">
-    <div class="testimonial-card"><img src="https://randomuser.me/api/portraits/men/32.jpg" /><p>"Saad scaled our store to $90K in 4 months. Killer ads + CRM."</p></div>
-    <div class="testimonial-card"><img src="https://randomuser.me/api/portraits/women/44.jpg" /><p>"Exceptional on HubSpot + Meta Ads. Great results."</p></div>
-    <div class="testimonial-card"><img src="https://randomuser.me/api/portraits/men/91.jpg" /><p>"The best growth partner we’ve had so far."</p></div>
-    <div class="testimonial-card"><img src="https://randomuser.me/api/portraits/women/88.jpg" /><p>"From idea to revenue in 6 weeks. Highly recommend."</p></div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="section-title">Let’s Connect</div>
-  <p style="font-size:1.2rem;">If you’re ready to scale your brand, launch your store, or automate your CRM — I’m ready to help. Let’s make it happen!</p>
-  <a class="cta" href="mailto:msaadjawed@hotmail.com">📧 Contact Saad</a>
-</section>
-
-<footer>
-  <p>© 2025 Saad Jawed. All Rights Reserved.</p>
-  <div class="footer-nav">
-    <a href="#about">About</a> |
-    <a href="#services">Services</a> |
-    <a href="#contact">Contact</a> |
-    <a href="https://www.upwork.com/freelancers/~01f9ec472532506f7f" target="_blank">Upwork</a>
-  </div>
-  <p>Based in Pakistan — Working with Clients Worldwide 🌍</p>
-</footer>
-
-<script>
-  const cursor = document.getElementById('cursor');
+  <nav>
+   <a href="#about">
+    About
+   </a>
+   <a href="#services">
+    Services
+   </a>
+   <a href="#metrics">
+    Results
+   </a>
+   <a href="#testimonials">
+    Testimonials
+   </a>
+   <a href="#contact">
+    Contact
+   </a>
+  </nav>
+  <header>
+   <h1>
+    Saad Jawed
+   </h1>
+   <p>
+    Growth Marketer | Shopify &amp; CRM Expert | Scaling Brands with Paid Ads
+   </p>
+   <a class="cta" href="mailto:msaadjawed@hotmail.com">
+    📧 Let's Talk
+   </a>
+  </header>
+  <section id="about">
+   <div class="section-title">
+    About Me
+   </div>
+   <p style="font-size:1.3rem;">
+    I help eCommerce brands grow from scratch to $100K+ using full-funnel ad strategies across Meta, TikTok &amp; Snapchat, and advanced CRM automations in HubSpot &amp; Klaviyo. I manage over $100K/month in ad spend, delivering consistent ROI, retention, and brand equity. Let's build your growth engine today.
+   </p>
+  </section>
+  <section id="services">
+   <div class="section-title">
+    Services
+   </div>
+   <div class="grid">
+    <div class="box">
+     📊 Meta, TikTok, Snapchat Ads (Cold &amp; Retargeting)
+    </div>
+    <div class="box">
+     🛒 Shopify Store Setup, Optimization &amp; Theme Edits
+    </div>
+    <div class="box">
+     📈 Conversion Tracking, CRO &amp; Sales Funnel Setup
+    </div>
+    <div class="box">
+     📬 CRM Strategy: HubSpot, Klaviyo, Email/WhatsApp
+    </div>
+   </div>
+  </section>
+  <section id="metrics">
+   <div class="section-title">
+    Results &amp; Metrics
+   </div>
+   <div class="grid">
+    <div class="box">
+     💰 $100K+ Monthly Ad Budget Managed
+    </div>
+    <div class="box">
+     📦 $500K+ Revenue Generated for Clients
+    </div>
+    <div class="box">
+     🚀 3.1x ROAS on Cold Traffic Campaigns
+    </div>
+    <div class="box">
+     📊 45% Increase in Retention via CRM Automation
+    </div>
+   </div>
+  </section>
+  <section id="testimonials">
+   <div class="section-title">
+    Client Testimonials
+   </div>
+   <div class="testimonial-slider">
+    <div class="testimonial-card">
+     <img src="https://randomuser.me/api/portraits/men/32.jpg"/>
+     <p>
+      "Saad scaled our store to $90K in 4 months. Killer ads + CRM."
+     </p>
+    </div>
+    <div class="testimonial-card">
+     <img src="https://randomuser.me/api/portraits/women/44.jpg"/>
+     <p>
+      "Exceptional on HubSpot + Meta Ads. Great results."
+     </p>
+    </div>
+    <div class="testimonial-card">
+     <img src="https://randomuser.me/api/portraits/men/91.jpg"/>
+     <p>
+      "The best growth partner we’ve had so far."
+     </p>
+    </div>
+    <div class="testimonial-card">
+     <img src="https://randomuser.me/api/portraits/women/88.jpg"/>
+     <p>
+      "From idea to revenue in 6 weeks. Highly recommend."
+     </p>
+    </div>
+    <div class="testimonial-card">
+     <img src="https://randomuser.me/api/portraits/men/24.jpg"/>
+     <p>
+      "Delivered strong results from day one. Knows exactly what works."
+     </p>
+    </div>
+    <div class="testimonial-card">
+     <img src="https://randomuser.me/api/portraits/women/65.jpg"/>
+     <p>
+      "Great strategist. Helped us unlock new channels and scale fast."
+     </p>
+    </div>
+   </div>
+  </section>
+  <section id="contact">
+   <div class="section-title">
+    Let’s Connect
+   </div>
+   <p style="font-size:1.2rem;">
+    If you’re ready to scale your brand, launch your store, or automate your CRM — I’m ready to help. Let’s make it happen!
+   </p>
+   <a class="cta" href="mailto:msaadjawed@hotmail.com">
+    📧 Contact Saad
+   </a>
+  </section>
+  <footer>
+   <p>
+    © 2025 Saad Jawed. All Rights Reserved.
+   </p>
+   <div class="footer-nav">
+    <a href="#about">
+     About
+    </a>
+    |
+    <a href="#services">
+     Services
+    </a>
+    |
+    <a href="#contact">
+     Contact
+    </a>
+    |
+    <a href="https://www.upwork.com/freelancers/~01f9ec472532506f7f" target="_blank">
+     Upwork
+    </a>
+   </div>
+   <p>
+    Based in Pakistan — Working with Clients Worldwide 🌍
+   </p>
+  </footer>
+  <script>
+   const cursor = document.getElementById('cursor');
   document.addEventListener('mousemove', e => {
     cursor.style.left = e.pageX + 'px';
     cursor.style.top = e.pageY + 'px';
   });
-</script>
-
-</body>
+  </script>
+ </body>
 </html>
