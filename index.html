@@ -7,23 +7,22 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
-  <!-- AOS for scroll animations -->
+  <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-  <!-- Swiper for carousels -->
+  <!-- Swiper -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-
-  <!-- Typed.js for hero taglines -->
+  <!-- Typed.js -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
   <style>
     :root {
       --bg: #0a0a0a;
-      --fg: #ffffff;
+      --fg: #fff;
       --accent: #ffd700;
       --card: #1a1a1a;
       --shadow: rgba(0,0,0,0.5);
+      --vgap: 80px;
+      --hpad: 5vw;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
@@ -37,33 +36,45 @@
     /* Preloader */
     #preloader {
       position:fixed; top:0; left:0; right:0; bottom:0;
-      background:var(--bg); display:flex; align-items:center; justify-content:center;
-      z-index:9999;
+      background:var(--bg); display:flex;
+      align-items:center; justify-content:center; z-index:9999;
     }
     #preloader div {
       width:50px; height:50px; border:5px solid var(--accent);
       border-top-color:transparent; border-radius:50%;
       animation:spin 1s linear infinite;
     }
-    @keyframes spin { to { transform:rotate(360deg); } }
-
+    @keyframes spin { to{transform:rotate(360deg);} }
     /* Custom cursor */
     #cursor {
       position:fixed; width:18px; height:18px; border-radius:50%;
       background:var(--accent); pointer-events:none;
       mix-blend-mode:difference; transform:translate(-50%,-50%);
-      transition:transform .15s ease-out; z-index:10000;
+      transition:transform .15s ease-out; z-index:9999;
+    }
+    @media(hover:none){ #cursor{display:none;} }
+
+    /* Full-width + padding */
+    header, section, .swiper-container {
+      width:100%; max-width:none;
+      padding:var(--vgap) var(--hpad);
+    }
+    body::before {
+      content:""; position:fixed; top:0; left:0;
+      width:100%; height:100%;
+      background:url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity:0.04; z-index:-1;
     }
 
-    /* Sticky nav */
+    /* Nav */
     nav {
-      position:sticky; top:0; background:rgba(10,10,10,0.85);
-      display:flex; justify-content:center; gap:2rem; padding:1rem;
-      z-index:1000; border-bottom:1px solid #333;
+      position:sticky; top:0; display:flex; justify-content:center;
+      gap:2rem; padding:1rem var(--hpad);
+      background:var(--bg); z-index:1000; border-bottom:1px solid #333;
     }
     nav a {
       color:var(--fg); text-decoration:none; font-weight:500; position:relative;
-      padding:.25rem;
+      padding:.25rem; text-align:center;
     }
     nav a.active::after {
       content:''; position:absolute; left:0; bottom:0;
@@ -75,8 +86,7 @@
     header {
       min-height:100vh; display:flex; flex-direction:column;
       justify-content:center; align-items:center; text-align:center;
-      padding:2rem;
-      background:linear-gradient(135deg,#111,#222);
+      background:linear-gradient(135deg,#111,#222) no-repeat center/cover;
       background-attachment:fixed;
     }
     header img {
@@ -85,101 +95,97 @@
       margin-bottom:1rem; animation:float 3s ease-in-out infinite;
     }
     @keyframes float {
-      0%,100% { transform:translateY(0); }
-      50% { transform:translateY(-15px); }
+      0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}
     }
     header h1 {
       font-family:'Playfair Display',serif; font-size:3.5rem;
       color:var(--accent); margin-bottom:.5rem;
       text-shadow:0 4px 10px var(--shadow);
-    }
-    header p {
-      font-size:1.2rem; color:#ccc; margin-bottom:1.5rem;
+      text-align:center;
     }
     .typed-text {
-      font-weight:700; color:var(--accent);
+      font-size:1.2rem; font-weight:700; color:var(--accent);
       border-right:2px solid var(--accent);
       white-space:nowrap; overflow:hidden;
+      margin-bottom:1.5rem; text-align:center;
     }
     .cta {
       padding:1rem 2rem; background:var(--accent); color:#000;
       font-weight:700; border:none; border-radius:8px;
       box-shadow:0 5px 15px var(--shadow);
       transition:transform .3s,box-shadow .3s;
+      text-align:center;
     }
     .cta:hover {
-      transform:scale(1.05);
-      box-shadow:0 8px 20px var(--shadow);
+      transform:scale(1.05); box-shadow:0 8px 20px var(--shadow);
     }
 
-    /* Section title */
+    /* Section titles */
     .section-title {
       font-size:2.5rem; color:var(--accent);
       font-family:'Playfair Display',serif;
-      margin-bottom:1rem; position:relative;
+      margin-bottom:calc(var(--vgap)/2); text-align:center;
     }
     .section-title::after {
       content:''; display:block; width:60px; height:3px;
       background:var(--accent); margin:12px auto 0;
     }
 
-    /* Sections */
-    section {
-      padding:80px 20px; max-width:1100px; margin:0 auto; text-align:center;
-    }
-
     /* About */
-    #about p { font-size:1.1rem; line-height:1.6; color:#ddd; }
+    #about p { font-size:1.1rem; line-height:1.6; color:#ddd; text-align:center; }
 
-    /* Services (3×2) */
+    /* Services */
     .services-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:30px; margin-top:2rem;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
     }
     .service-card {
       background:var(--card); padding:1.5rem; border-radius:12px;
       box-shadow:0 5px 20px var(--shadow);
-      transition:transform .3s;
+      transition:transform .3s,box-shadow .3s;
+      text-align:center;
     }
-    .service-card:hover { transform:translateY(-10px); }
+    .service-card:hover {
+      transform:translateY(-10px);
+      box-shadow:0 8px 25px rgba(255,215,0,0.3);
+    }
     .service-card h3 { margin-bottom:.75rem; color:var(--accent); }
 
     /* Projects */
     .projects-grid {
-      display:flex; gap:30px; flex-wrap:wrap; justify-content:center;
-      margin-top:2rem;
+      display:flex; flex-wrap:wrap; gap:30px; justify-content:center;
     }
     .project-card {
       background:var(--card); border-radius:12px; overflow:hidden;
       box-shadow:0 5px 20px var(--shadow);
-      max-width:400px; transition:transform .3s;
+      transition:transform .3s; flex:1 1 300px; max-width:400px;
     }
     .project-card:hover { transform:translateY(-8px); }
     .project-card img { width:100%; display:block; }
-    .project-card .info { padding:1rem; text-align:left; }
+    .project-card .info {
+      padding:1rem; text-align:center;
+    }
     .project-card h4 { color:var(--accent); margin-bottom:.5rem; }
-    .project-card p { font-size:1rem; color:#ccc; }
+    .project-card p { color:#ccc; }
 
-    /* Results/ Metrics (1×4) */
+    /* Metrics */
     .metrics-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:25px; margin-top:2rem;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:25px;
     }
     .metric-card {
       background:var(--card); padding:1.5rem; border-radius:12px;
       box-shadow:0 5px 20px var(--shadow);
-      transition:transform .3s;
+      transition:transform .3s; text-align:center;
     }
     .metric-card:hover { transform:translateY(-8px) scale(1.03); }
     .metric-card h3 { font-size:2rem; color:var(--accent); }
-    .metric-card p { color:#ccc; margin-top:.5rem; }
+    .metric-card p { margin-top:.5rem; color:#ccc; }
 
     /* Why Choose Me */
     #why {
-      display:grid; grid-template-columns:1fr 1fr;
-      gap:40px; margin-top:2rem; text-align:left;
+      display:grid; grid-template-columns:1fr 1fr; gap:40px;
+      text-align:center;
     }
     .compare-box {
       background:var(--card); padding:1.5rem; border-radius:12px;
@@ -188,25 +194,26 @@
     }
     .compare-box:hover { transform:translateY(-8px); }
     .compare-box h4 { color:var(--accent); margin-bottom:.75rem; }
-    .compare-box ul { list-style:disc; margin-left:1.2rem; color:#ccc; }
-    @media(max-width:768px){ #why { grid-template-columns:1fr; } }
+    .compare-box ul {
+      margin:0 auto; padding-left:1em; text-align:left; color:#ccc;
+    }
+    @media(max-width:768px){ #why{grid-template-columns:1fr;} }
 
-    /* Swiper slides (Tools & Testimonials) */
-    .swiper-container { padding:40px 0; }
+    /* Carousels */
+    .swiper-container { overflow:visible; }
     .swiper-slide {
-      display:flex; align-items:center; justify-content:center;
       background:var(--card); padding:1rem; border-radius:12px;
       box-shadow:0 5px 20px var(--shadow);
+      display:flex; align-items:center; justify-content:center;
     }
     .swiper-slide img {
       width:60px; filter:grayscale(100%);
-      transition:filter .3s,transform .3s;
+      transition:filter .3s, transform .3s;
     }
     .swiper-slide:hover img {
       filter:grayscale(0); transform:scale(1.1);
     }
-    .testimonial-card { text-align:center; }
-    .testimonial-card p { font-style:italic; color:#ccc; margin:1rem 0; }
+    .testimonial-card p { font-style:italic; color:#ccc; margin:1rem 0; text-align:center; }
 
     /* Contact */
     #contact form {
@@ -215,14 +222,15 @@
     #contact label {
       display:block; margin-top:1rem; color:#ddd; font-size:.9rem;
     }
-    #contact input,#contact textarea {
+    #contact input, #contact textarea {
       width:100%; padding:.75rem; border:none; border-radius:8px;
       background:#222; color:#fff; margin-top:.5rem;
     }
     #contact button {
       margin-top:1rem; background:var(--accent); color:#000;
       border:none; padding:1rem 2rem; font-weight:700; border-radius:8px;
-      cursor:pointer; transition:transform .3s,box-shadow .3s;
+      cursor:pointer; transition:transform .3s, box-shadow .3s;
+      display:block; margin-left:auto; margin-right:auto;
     }
     #contact button:hover {
       transform:scale(1.05); box-shadow:0 5px 15px var(--shadow);
@@ -230,8 +238,8 @@
 
     /* Footer */
     footer {
-      background:var(--card); padding:2rem 1rem; text-align:center;
-      color:#aaa; font-size:.9rem; margin-top:4rem;
+      background:var(--card); padding:3rem var(--hpad);
+      text-align:center; color:#aaa; font-size:.9rem; margin-top:var(--vgap);
     }
     footer .footer-nav a {
       color:#ccc; margin:0 8px; text-decoration:none;
@@ -240,37 +248,34 @@
   </style>
 </head>
 <body>
-
   <!-- Preloader -->
   <div id="preloader"><div></div></div>
-
   <!-- Custom Cursor -->
   <div id="cursor"></div>
-
   <!-- Navigation -->
   <nav>
-    <a href="#about" class="nav-link">About</a>
-    <a href="#services" class="nav-link">Services</a>
-    <a href="#projects" class="nav-link">Projects</a>
-    <a href="#metrics" class="nav-link">Results</a>
-    <a href="#why" class="nav-link">Why Me</a>
-    <a href="#tools" class="nav-link">Tools</a>
-    <a href="#testimonials" class="nav-link">Testimonials</a>
-    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#projects">Projects</a>
+    <a href="#metrics">Results</a>
+    <a href="#why">Why Me</a>
+    <a href="#tools">Tools</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
   </nav>
 
   <!-- Hero -->
   <header data-aos="fade-in">
     <img src="https://i.ibb.co/GQMB3FLX/1648319426145.jpg" alt="Saad Jawed avatar">
     <h1>Saad Jawed</h1>
-    <span class="typed-text"></span>
+    <div class="typed-text"></div>
     <a href="#contact" class="cta">🚀 Let’s Get Started</a>
   </header>
 
-  <!-- About Me -->
+  <!-- About -->
   <section id="about" data-aos="fade-up">
     <div class="section-title">About Me</div>
-    <p>I’m a growth strategist specializing in Shopify stores, paid-ads across Meta & TikTok, and advanced CRM automations. I’ve managed over $100K/month in ad spend, driven 3.5×+ ROAS for DTC brands, and built retention workflows that boost customer LTV.</p>
+    <p>I’m a growth strategist specializing in Shopify stores, Meta & TikTok paid ads, and CRM automations. I manage $100K+/mo in ad spend, drive 3.5× ROAS, and build retention workflows for LTV.</p>
   </section>
 
   <!-- Services -->
@@ -279,27 +284,27 @@
     <div class="services-grid">
       <div class="service-card" data-aos="fade-up" data-aos-delay="100">
         <h3>Meta & TikTok Ads</h3>
-        <p>From cold-traffic funnels to high-ROI retargeting.</p>
+        <p>Cold funnels to high-ROI retargeting.</p>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="200">
         <h3>Shopify Growth</h3>
-        <p>Store setups, theme edits, and CRO optimizations.</p>
+        <p>Store builds, theme edits & CRO.</p>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="300">
         <h3>Sales Funnels</h3>
-        <p>Landing pages, email sequences, and upsell flows.</p>
+        <p>Landing pages, email flows & upsells.</p>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="400">
         <h3>CRM Automations</h3>
-        <p>HubSpot & Klaviyo workflows driving retention.</p>
+        <p>HubSpot & Klaviyo workflows.</p>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="500">
         <h3>WhatsApp & Email</h3>
-        <p>Personalized messaging campaigns at scale.</p>
+        <p>Personalized messaging campaigns.</p>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="600">
-        <h3>Analytics & Reporting</h3>
-        <p>Data-driven insights to optimize every step.</p>
+        <h3>Analytics</h3>
+        <p>Data insights to optimize funnels.</p>
       </div>
     </div>
   </section>
@@ -312,35 +317,27 @@
         <img src="https://i.ibb.co/CN47wTt/Chat-GPT-Image-Jun-22-2025-01-02-44-AM.png" alt="Project 1">
         <div class="info">
           <h4>3.2× ROAS in 60 Days</h4>
-          <p>Scaled a new launch to $30K+ monthly revenue.</p>
+          <p>Scaled a launch to $30K+ monthly revenue.</p>
         </div>
       </div>
       <div class="project-card">
         <img src="https://i.ibb.co/Hfp3nDcX/Chat-GPT-Image-Jun-22-2025-01-02-53-AM.png" alt="Project 2">
         <div class="info">
           <h4>$6.5K Spent → 4.23 ROAS</h4>
-          <p>Drove 213 purchases at $4.88 CPA in 2 weeks.</p>
+          <p>213 purchases at $4.88 CPA in 2 weeks.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Results & Metrics -->
-  <section id="metrics">
-    <div class="section-title" data-aos="fade-up">Results & Metrics</div>
+  <section id="metrics" data-aos="fade-up">
+    <div class="section-title">Results & Metrics</div>
     <div class="metrics-grid">
-      <div class="metric-card" data-aos="fade-up" data-aos-delay="100">
-        <h3>$100K+</h3><p>Monthly Ad Budget</p>
-      </div>
-      <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
-        <h3>3.5×</h3><p>Avg. ROAS</p>
-      </div>
-      <div class="metric-card" data-aos="fade-up" data-aos-delay="300">
-        <h3>$250K</h3><p>Sales Generated</p>
-      </div>
-      <div class="metric-card" data-aos="fade-up" data-aos-delay="400">
-        <h3>45%</h3><p>CRM Retention Growth</p>
-      </div>
+      <div class="metric-card"><h3>$100K+</h3><p>Ad Budget</p></div>
+      <div class="metric-card"><h3>3.5×</h3><p>Avg. ROAS</p></div>
+      <div class="metric-card"><h3>$250K</h3><p>Sales Generated</p></div>
+      <div class="metric-card"><h3>45%</h3><p>Retention Growth</p></div>
     </div>
   </section>
 
@@ -349,19 +346,11 @@
     <div class="section-title">Why Choose Me?</div>
     <div class="compare-box">
       <h4>Others</h4>
-      <ul>
-        <li>One-size-fits-all ad setups</li>
-        <li>Basic theme edits</li>
-        <li>Slow support turnaround</li>
-      </ul>
+      <ul><li>Generic ad setups</li><li>Basic edits</li><li>Slow support</li></ul>
     </div>
     <div class="compare-box">
       <h4>Me</h4>
-      <ul>
-        <li>Custom, data-driven strategies</li>
-        <li>End-to-end CRO & retention focus</li>
-        <li>24-hr rapid support & reporting</li>
-      </ul>
+      <ul><li>Custom, data-driven</li><li>CRO & retention focus</li><li>24-hr support</li></ul>
     </div>
   </section>
 
@@ -370,7 +359,7 @@
     <div class="section-title">Tech & Tools</div>
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Meta_Platforms_Logo_2021.svg" alt="Meta Ads"></div>
+        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Meta_Platforms_Logo_2021.svg" alt="Meta"></div>
         <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/6/64/HubSpot_Logo.svg" alt="HubSpot"></div>
         <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Shopify_logo_2018.svg" alt="Shopify"></div>
         <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Mailchimp_Logo_2018.svg" alt="Mailchimp"></div>
@@ -383,25 +372,25 @@
   <!-- Testimonials Carousel -->
   <section id="testimonials" data-aos="fade-up">
     <div class="section-title">What Clients Say</div>
-    <div class="swiper-container">  
+    <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide testimonial-card">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
           <p>"Saad transformed our ad spend into explosive growth!"</p>
           <strong>— Ahmed R.</strong>
         </div>
         <div class="swiper-slide testimonial-card">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
           <p>"His CRM automations save us hours every week."</p>
           <strong>— Lisa W.</strong>
         </div>
         <div class="swiper-slide testimonial-card">
-          <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="Client">
+          <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="">
           <p>"Best investment we made in ad strategy."</p>
           <strong>— Jake M.</strong>
         </div>
         <div class="swiper-slide testimonial-card">
-          <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="Client">
+          <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="">
           <p>"From zero to $50K/month in 6 weeks!"</p>
           <strong>— Sana J.</strong>
         </div>
@@ -413,12 +402,9 @@
   <section id="contact" data-aos="fade-up">
     <div class="section-title">Get In Touch</div>
     <form action="https://formspree.io/f/xkgbvywj" method="POST" onsubmit="setTimeout(()=>window.location.href='#',1000);">
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" placeholder="Your Name" required>
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" placeholder="Your Email" required>
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" placeholder="How can I help you?" required></textarea>
+      <label>Name</label><input name="name" type="text" placeholder="Your Name" required>
+      <label>Email</label><input name="email" type="email" placeholder="Your Email" required>
+      <label>Message</label><textarea name="message" rows="5" placeholder="How can I help?" required></textarea>
       <button type="submit">🚀 Send Your Message</button>
     </form>
   </section>
@@ -427,10 +413,7 @@
   <footer data-aos="fade-up">
     <p>© 2025 Saad Jawed. All Rights Reserved.</p>
     <div class="footer-nav">
-      <a href="#about">About</a> |
-      <a href="#services">Services</a> |
-      <a href="#contact">Contact</a> |
-      <a href="https://www.upwork.com/freelancers/~01f9ec472532506f7f" target="_blank">Upwork</a>
+      <a href="#about">About</a> | <a href="#services">Services</a> | <a href="#contact">Contact</a> | <a href="https://www.upwork.com/freelancers/~01f9ec472532506f7f" target="_blank">Upwork</a>
     </div>
     <p>Based in Pakistan — Working with Clients Worldwide 🌍</p>
   </footer>
@@ -440,52 +423,20 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
     // Preloader
-    window.addEventListener('load', ()=>document.getElementById('preloader').style.display='none');
-
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.pageX + 'px';
-      cursor.style.top  = e.pageY + 'px';
-    });
-    window.addEventListener('scroll', () => {
-      cursor.style.transform = 'translate(-50%,-50%) scale(0.8)';
-      setTimeout(() => {
-        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-      }, 200);
-    });
-
-    // Typed.js init
-    new Typed('.typed-text', {
-      strings: ['Growth Marketer','Shopify & CRM Expert','3.5× ROAS Specialist','Scaling DTC Brands'],
-      typeSpeed:60, backSpeed:30, loop:true
-    });
-
-    // AOS init
-    AOS.init({ once:true, duration:800 });
-
-    // Scroll-spy nav
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('nav a');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(sec => {
-        if (scrollY >= sec.offsetTop - 120) current = sec.id;
-      });
-      navLinks.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
-      });
-    });
-
-    // Swiper carousels
-    document.querySelectorAll('.swiper-container').forEach(swiperEl => {
-      new Swiper(swiperEl, {
-        loop: true,
-        autoplay: { delay: 3000 },
-        slidesPerView: 'auto',
-        spaceBetween: 20
-      });
-    });
+    window.addEventListener('load',()=>document.getElementById('preloader').style.display='none');
+    // Cursor
+    const cursor=document.getElementById('cursor');
+    document.addEventListener('mousemove',e=>{cursor.style.left=e.pageX+'px';cursor.style.top=e.pageY+'px';});
+    window.addEventListener('scroll',()=>{cursor.style.transform='translate(-50%,-50%) scale(.8)';setTimeout(()=>cursor.style.transform='translate(-50%,-50%) scale(1)',200);});
+    // Typed.js
+    new Typed('.typed-text',{strings:['Scaling Brands to $100K+/mo','3.5× ROAS on Cold Traffic','Automating CRM for LTV'],typeSpeed:50,backSpeed:25,loop:true});
+    // AOS
+    AOS.init({once:true,duration:800});
+    // Scroll-spy
+    const secs=document.querySelectorAll('section'), links=document.querySelectorAll('nav a');
+    window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(scrollY>=s.offsetTop-120)cur=s.id;});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===`#${cur}`));});
+    // Swiper
+    document.querySelectorAll('.swiper-container').forEach(el=>new Swiper(el,{loop:true,autoplay:{delay:3000},breakpoints:{0:{slidesPerView:1,spaceBetween:10},600:{slidesPerView:2,spaceBetween:15},900:{slidesPerView:3,spaceBetween:20}}}));
   </script>
 </body>
 </html>
