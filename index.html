@@ -1,343 +1,484 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Saad Jawed | Growth & CRM Strategist</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet"/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+
+  <!-- AOS for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+
+  <!-- Swiper for carousels -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+  <!-- Typed.js for hero -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
   <style>
     :root {
       --bg: #0a0a0a;
-      --text: #ffffff;
+      --fg: #ffffff;
       --accent: #ffd700;
-      --alt: #1a1a1a;
+      --card: #1a1a1a;
+      --shadow: rgba(0,0,0,0.5);
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; overflow-x: hidden; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      position: relative;
+      font-family:'Poppins', sans-serif;
+      background:var(--bg);
+      color:var(--fg);
+      overflow-x:hidden;
+      position:relative;
     }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('https://www.transparenttextures.com/patterns/stardust.png');
-      opacity: 0.05;
-      z-index: -1;
+    /* Preloader */
+    #preloader {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:var(--bg); display:flex; align-items:center; justify-content:center; z-index:9999;
     }
+    #preloader div {
+      width:50px; height:50px; border:5px solid var(--accent);
+      border-top-color:transparent; border-radius:50%;
+      animation:spin 1s linear infinite;
+    }
+    @keyframes spin { to{ transform: rotate(360deg); } }
+
+    /* Custom cursor */
     #cursor {
-      position: fixed;
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: var(--accent);
-      pointer-events: none;
-      z-index: 9999;
-      mix-blend-mode: difference;
-      transform: translate(-50%, -50%);
-      transition: transform 0.15s ease-out;
+      position:fixed; width:18px; height:18px;
+      border-radius:50%; background:var(--accent);
+      pointer-events:none; mix-blend-mode:difference;
+      transform:translate(-50%,-50%);
+      transition:transform .15s ease-out;
+      z-index:10000;
     }
+
+    /* Sticky nav */
     nav {
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-      z-index: 100;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 1rem;
-      border-bottom: 1px solid #333;
+      position:sticky; top:0; background:rgba(10,10,10,0.85);
+      display:flex; justify-content:center; gap:2rem; padding:1rem;
+      z-index:1000;
     }
     nav a {
-      color: var(--text);
-      font-weight: 600;
-      text-decoration: none;
+      color:var(--fg); text-decoration:none; font-weight:500;
+      position:relative; padding:.25rem;
     }
-    nav a:hover { color: var(--accent); }
+    nav a.active::after {
+      content:''; position:absolute; left:0; bottom:0;
+      width:100%; height:2px; background:var(--accent);
+    }
+    nav a:hover { color:var(--accent); }
 
+    /* Hero */
     header {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-      background: linear-gradient(135deg, #111, #222);
+      min-height:100vh; display:flex; flex-direction:column;
+      justify-content:center; align-items:center; text-align:center;
+      padding:2rem; background:linear-gradient(135deg,#111,#222);
+      background-attachment:fixed;
+    }
+    header img {
+      width:140px; border-radius:50%;
+      box-shadow:0 10px 30px var(--shadow);
+      margin-bottom:1rem; animation:float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100%{ transform:translateY(0); }
+      50%{ transform:translateY(-15px); }
     }
     header h1 {
-      font-size: 4rem;
-      font-weight: 900;
-      color: var(--accent);
+      font-family:'Playfair Display', serif;
+      font-size:3.5rem; color:var(--accent); margin-bottom:.5rem;
+      text-shadow:0 4px 10px var(--shadow);
     }
     header p {
-      font-size: 1.4rem;
-      color: #ccc;
-      margin: 1rem 0;
+      font-size:1.2rem; color:#ccc; margin-bottom:1.5rem;
+    }
+    .typed-text {
+      color:var(--accent); font-weight:700;
+      border-right:2px solid var(--accent); white-space:nowrap;
+      overflow:hidden;
     }
     .cta {
-      margin-top: 20px;
-      padding: 1rem 2rem;
-      background: var(--accent);
-      color: #000;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 12px;
-      transition: all 0.3s ease-in-out;
-      display: inline-block;
+      padding:1rem 2rem; background:var(--accent); color:#000;
+      font-weight:700; border:none; border-radius:8px;
+      box-shadow:0 5px 15px var(--shadow);
+      transition:transform .3s, box-shadow .3s;
     }
     .cta:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px var(--accent);
+      transform:scale(1.05); box-shadow:0 8px 20px var(--shadow);
     }
 
+    /* Sections */
     section {
-      padding: 60px 20px;
-      max-width: 1200px;
-      margin: auto;
-      text-align: center;
+      padding:80px 20px; max-width:1100px; margin:0 auto;
+      text-align:center; position:relative;
     }
     .section-title {
-      font-size: 2.4rem;
-      color: var(--accent);
-      margin-bottom: 1.2rem;
-      border-bottom: 2px solid var(--accent);
-      display: inline-block;
+      font-size:2.5rem; color:var(--accent);
+      font-family:'Playfair Display', serif;
+      margin-bottom:1rem; position:relative;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      margin-top: 40px;
-    }
-    .box {
-      background: var(--alt);
-      padding: 1.5rem;
-      border-radius: 16px;
-      transition: 0.3s ease;
-      font-size: 1.1rem;
-      box-shadow: 0 0 10px #111;
-    }
-    .box:hover {
-      background: #2a2a2a;
-      transform: scale(1.03);
+    .section-title::after {
+      content:''; display:block; width:60px; height:3px;
+      background:var(--accent); margin:12px auto 0;
     }
 
-    .testimonial-slider {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 20px;
-      padding-bottom: 10px;
+    /* About */
+    #about p { font-size:1.1rem; line-height:1.6; color:#ddd; }
+
+    /* Services 3×2 */
+    .services-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px; margin-top:2rem;
     }
-    .testimonial-slider::-webkit-scrollbar { display: none; }
+    .service-card {
+      background:var(--card); padding:1.5rem; border-radius:12px;
+      box-shadow:0 5px 20px var(--shadow);
+      transition:transform .3s;
+    }
+    .service-card:hover { transform:translateY(-10px); }
+    .service-card h3 { margin-bottom:.75rem; color:var(--accent); }
+
+    /* Projects */
+    .projects-grid {
+      display:flex; gap:30px; flex-wrap:wrap; justify-content:center; margin-top:2rem;
+    }
+    .project-card {
+      background:var(--card); border-radius:12px; overflow:hidden;
+      box-shadow:0 5px 20px var(--shadow); max-width:400px; transition:transform .3s;
+    }
+    .project-card:hover { transform:translateY(-8px); }
+    .project-card img { width:100%; display:block; }
+    .project-card .info { padding:1rem; text-align:left; }
+    .project-card h4 { color:var(--accent); margin-bottom:.5rem; }
+    .project-card p { font-size:1rem; color:#ccc; }
+
+    /* Results 2×2 animated */
+    .metrics-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px; margin-top:2rem;
+    }
+    .metric-card {
+      background:var(--card); padding:1.5rem; border-radius:12px;
+      box-shadow:0 5px 20px var(--shadow); overflow:hidden;
+      position:relative; transform:translateY(20px); opacity:0;
+    }
+    .metric-card.visible {
+      animation:slideUpFade .6s ease-out forwards;
+    }
+    @keyframes slideUpFade {
+      to { transform:translateY(0); opacity:1; }
+    }
+    .metric-card h3 { font-size:2rem; color:var(--accent); }
+    .metric-card p { color:#ccc; margin-top:.5rem; }
+
+    /* Why Choose Me */
+    #why {
+      display:grid; grid-template-columns:1fr 1fr; gap:40px;
+      margin-top:2rem; text-align:left;
+    }
+    .compare-box {
+      background:var(--card); padding:1.5rem; border-radius:12px;
+      box-shadow:0 5px 20px var(--shadow); position:relative;
+      overflow:hidden; transition:transform .3s;
+    }
+    .compare-box:hover { transform:translateY(-8px); }
+    .compare-box h4 { color:var(--accent); margin-bottom:.75rem; }
+    .compare-box ul { list-style:disc; margin-left:1.2rem; color:#ccc; }
+
+    /* Tools carousel */
+    .swiper-container { padding:40px 0; }
+    .swiper-slide {
+      display:flex; align-items:center; justify-content:center;
+      background:var(--card); padding:1rem; border-radius:12px;
+      box-shadow:0 5px 20px var(--shadow);
+    }
+    .swiper-slide img { width:60px; filter:grayscale(100%); transition:filter .3s,transform .3s; }
+    .swiper-slide img:hover { filter:grayscale(0); transform:scale(1.1); }
+
+    /* Testimonials carousel */
     .testimonial-card {
-      scroll-snap-align: start;
-      flex: 0 0 300px;
-      background: var(--alt);
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
+      background:var(--card); padding:1.5rem; border-radius:12px;
+      box-shadow:0 5px 20px var(--shadow); text-align:center;
     }
-    .testimonial-card img {
-      width: 60px; height: 60px;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-    }
-    .testimonial-card p {
-      font-size: 1rem;
-      color: #ccc;
+    .testimonial-card img { width:60px; height:60px; border-radius:50%; margin-bottom:1rem; }
+    .testimonial-card p { font-style:italic; color:#ccc; }
+
+    /* Contact */
+    #contact form { max-width:500px; margin:2rem auto; text-align:left; }
+    #contact label { display:block; margin-top:1rem; color:#ddd; font-size:.9rem; }
+    #contact input, #contact textarea {
+      width:100%; padding:.75rem; border:none; border-radius:8px;
+      background:#222; color:#fff; margin-top:.5rem;
     }
 
-    .tool-logos {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 30px;
-    }
-    .tool-logos img {
-      filter: grayscale(100%);
-      width: 80px; transition: 0.3s;
-    }
-    .tool-logos img:hover {
-      filter: grayscale(0%);
-      transform: scale(1.1);
-    }
-
-    form {
-      margin-top: 30px;
-    }
-    input, textarea {
-      width: 100%;
-      max-width: 600px;
-      padding: 1rem;
-      margin: 0.5rem 0;
-      border-radius: 10px;
-      border: none;
-      font-family: 'Inter', sans-serif;
-    }
-    button {
-      background: var(--accent);
-      padding: 1rem 2rem;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px var(--accent);
-    }
-
+    /* Footer */
     footer {
-      background: var(--alt);
-      padding: 3rem 1rem;
-      text-align: center;
-      font-size: 1rem;
-      color: #aaa;
+      background:var(--card); padding:2rem 1rem; text-align:center; color:#aaa;
+      font-size:.9rem; margin-top:4rem;
     }
-    footer .footer-nav { margin: 1rem 0; }
-    footer a {
-      color: #ccc;
-      margin: 0 10px;
-      text-decoration: none;
-    }
-    footer a:hover { color: var(--accent); }
+    footer a { color:#ccc; margin:0 8px; text-decoration:none; }
+    footer a:hover { color:var(--accent); }
 
-    @media (max-width: 768px) {
-      header h1 { font-size: 2.2rem; }
-      .grid { grid-template-columns: 1fr; }
+    @media(max-width:768px){
+      header h1 { font-size:2.5rem; }
+      #why { grid-template-columns:1fr; }
     }
   </style>
 </head>
 <body>
-<div id="cursor"></div>
 
-<nav>
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#metrics">Results</a>
-  <a href="#portfolio">Projects</a>
-  <a href="#tools">Tools</a>
-  <a href="#testimonials">Testimonials</a>
-  <a href="#contact">Contact</a>
-</nav>
+  <!-- Preloader -->
+  <div id="preloader"><div></div></div>
 
-<header>
-  <h1>Saad Jawed</h1>
-  <p>Growth Marketer | Shopify & CRM Expert | Scaling Brands with Paid Ads</p>
-  <a class="cta" href="#contact">🚀 Let's Get Started</a>
-</header>
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
 
-<section id="about">
-  <div class="section-title">About Me</div>
-  <p style="font-size:1.3rem;">
-    I help eCommerce brands grow from scratch to $100K+ using full-funnel ad strategies across Meta, TikTok & Snapchat, and advanced CRM automations in HubSpot & Klaviyo. I manage over $100K/month in ad spend, delivering consistent ROI, retention, and brand equity.
-  </p>
-</section>
+  <!-- Nav -->
+  <nav>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#services" class="nav-link">Services</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#metrics" class="nav-link">Results</a>
+    <a href="#why" class="nav-link">Why Me</a>
+    <a href="#tools" class="nav-link">Tools</a>
+    <a href="#testimonials" class="nav-link">Testimonials</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </nav>
 
-<section id="services">
-  <div class="section-title">Services</div>
-  <div class="grid">
-    <div class="box">📊 Meta, TikTok, Snapchat Ads (Cold & Retargeting)</div>
-    <div class="box">🛒 Shopify Store Setup, Optimization & Theme Edits</div>
-    <div class="box">📈 Conversion Tracking, CRO & Sales Funnel Setup</div>
-    <div class="box">📬 CRM Strategy: HubSpot, Klaviyo, Email/WhatsApp</div>
-    <div class="box">📦 Landing Pages, A/B Testing & UGC Integration</div>
-    <div class="box">🧩 Customer Retention + Segmentation Strategy</div>
-  </div>
-</section>
+  <!-- Hero -->
+  <header data-aos="fade-in">
+    <img src="/mnt/data/1648319426145.jpg" alt="Saad Jawed avatar">
+    <h1>Saad Jawed</h1>
+    <p class="typed-text"></p>
+    <a href="#contact" class="cta">🚀 Let's Get Started</a>
+  </header>
 
-<section id="metrics">
-  <div class="section-title">Results & Metrics</div>
-  <div class="grid">
-    <div class="box">💰 $100K+ Monthly Ad Budget Managed</div>
-    <div class="box">📦 $500K+ Revenue Generated for Clients</div>
-    <div class="box">🚀 3.1x ROAS on Cold Traffic Campaigns</div>
-    <div class="box">📊 45% Increase in Retention via CRM Automation</div>
-  </div>
-</section>
+  <!-- About -->
+  <section id="about" data-aos="fade-up">
+    <div class="section-title">About Me</div>
+    <p>I’m a growth strategist specializing in Shopify stores, paid-ads across Meta & TikTok, and advanced CRM automations. I’ve managed over $100K/month in ad spend, driven 3.5x+ ROAS for DTC brands, and built retention workflows that boost customer LTV.</p>
+  </section>
 
-<section id="portfolio">
-  <div class="section-title">Project Results</div>
-  <div class="grid">
-    <img src="https://via.placeholder.com/400x250?text=Ad+Result+1" style="border-radius:12px;">
-    <img src="https://via.placeholder.com/400x250?text=Ad+Result+2" style="border-radius:12px;">
-  </div>
-</section>
-
-<section id="tools">
-  <div class="section-title">Tools I Use</div>
-  <div class="tool-logos">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Meta_Platforms_Logo_2021.svg" alt="Meta">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/HubSpot_Logo.svg" alt="HubSpot">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Shopify_logo_2018.svg" alt="Shopify">
-    <img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Mailchimp_Logo_2018.svg" alt="Mailchimp">
-    <img src="https://seeklogo.com/images/O/onesignal-logo-5D1466978B-seeklogo.com.png" alt="OneSignal">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-  </div>
-</section>
-
-<section id="testimonials">
-  <div class="section-title">Client Testimonials</div>
-  <div class="testimonial-slider">
-    <div class="testimonial-card">
-      <img src="https://randomuser.me/api/portraits/men/32.jpg"/>
-      <p>"Saad scaled our store to $90K in 4 months. Killer ads + CRM."</p>
+  <!-- Services -->
+  <section id="services">
+    <div class="section-title" data-aos="fade-up">Services</div>
+    <div class="services-grid">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+        <h3>Meta & TikTok Ads</h3>
+        <p>From cold-traffic funnels to high-ROI retargeting.</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Shopify Growth</h3>
+        <p>Store setups, theme customizations, and CRO funnels.</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+        <h3>Sales Funnels</h3>
+        <p>Landing pages, email sequences, and upsell flows.</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+        <h3>CRM Automations</h3>
+        <p>HubSpot & Klaviyo workflows that drive retention.</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+        <h3>WhatsApp & Email</h3>
+        <p>Personalized messaging campaigns at scale.</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+        <h3>Analytics & Reporting</h3>
+        <p>Data-driven insights to optimize every step of the funnel.</p>
+      </div>
     </div>
-    <div class="testimonial-card">
-      <img src="https://randomuser.me/api/portraits/women/44.jpg"/>
-      <p>"Exceptional on HubSpot + Meta Ads. Great results."</p>
-    </div>
-    <div class="testimonial-card">
-      <img src="https://randomuser.me/api/portraits/men/91.jpg"/>
-      <p>"The best growth partner we’ve had so far."</p>
-    </div>
-    <div class="testimonial-card">
-      <img src="https://randomuser.me/api/portraits/women/88.jpg"/>
-      <p>"From idea to revenue in 6 weeks. Highly recommend."</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="contact">
-  <div class="section-title">Let’s Connect</div>
-  <form action="https://formspree.io/f/xkgbvywj" method="POST" onsubmit="setTimeout(()=>window.location.href='#',1500);">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="message" placeholder="Tell me what you need..." rows="5" required></textarea>
-    <button type="submit">🚀 Let's Get Started</button>
-  </form>
-</section>
+  <!-- Projects -->
+  <section id="projects" data-aos="fade-up">
+    <div class="section-title">Project Highlights</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400x250?text=Meta+Ads+Dashboard" alt="Meta Ads Results">
+        <div class="info">
+          <h4>3.2x ROAS in 60 Days</h4>
+          <p>Scaled a new product launch to $30K/month revenue.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400x250?text=Shopify+Growth+Metrics" alt="Shopify Growth">
+        <div class="info">
+          <h4>$70K Generated in 90 Days</h4>
+          <p>Turned a scratch store into a thriving e-commerce brand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<footer>
-  <p>© 2025 Saad Jawed. All Rights Reserved.</p>
-  <div class="footer-nav">
-    <a href="#about">About</a> |
-    <a href="#services">Services</a> |
-    <a href="#contact">Contact</a> |
-    <a href="https://www.upwork.com/freelancers/~01f9ec472532506f7f" target="_blank">Upwork</a>
-  </div>
-  <p>Based in Pakistan — Working with Clients Worldwide 🌍</p>
-</footer>
+  <!-- Results & Metrics -->
+  <section id="metrics">
+    <div class="section-title" data-aos="fade-up">Results & Metrics</div>
+    <div class="metrics-grid">
+      <div class="metric-card" data-aos="fade-up" data-aos-delay="100">
+        <h3>$100K+</h3>
+        <p>Monthly Ad Budget Managed</p>
+      </div>
+      <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>3.5x</h3>
+        <p>Average ROAS</p>
+      </div>
+      <div class="metric-card" data-aos="fade-up" data-aos-delay="300">
+        <h3>$250K</h3>
+        <p>Sales Generated</p>
+      </div>
+      <div class="metric-card" data-aos="fade-up" data-aos-delay="400">
+        <h3>45%</h3>
+        <p>CRM Retention Growth</p>
+      </div>
+    </div>
+  </section>
 
-<script>
-  const cursor = document.getElementById('cursor');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.pageX + 'px';
-    cursor.style.top = e.pageY + 'px';
-  });
-  window.addEventListener('scroll', () => {
-    cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
-    setTimeout(() => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-    }, 200);
-  });
-</script>
+  <!-- Why Choose Me -->
+  <section id="why" data-aos="fade-up">
+    <div class="section-title">Why Choose Me?</div>
+    <div class="compare-box">
+      <h4>Others</h4>
+      <ul>
+        <li>One-size-fits-all ad setups</li>
+        <li>Cookie-cutter funnels</li>
+        <li>Slow support turnaround</li>
+      </ul>
+    </div>
+    <div class="compare-box">
+      <h4>Me</h4>
+      <ul>
+        <li>Custom, data-driven strategies</li>
+        <li>End-to-end CRO & retention focus</li>
+        <li>Rapid, 24-hr support & reporting</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Tools Carousel -->
+  <section id="tools" data-aos="fade-up">
+    <div class="section-title">Tech & Tools</div>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Meta_Platforms_Logo_2021.svg" alt="Meta Ads"/></div>
+        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/6/64/HubSpot_Logo.svg" alt="HubSpot"/></div>
+        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Shopify_logo_2018.svg" alt="Shopify"/></div>
+        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Mailchimp_Logo_2018.svg" alt="Mailchimp"/></div>
+        <div class="swiper-slide"><img src="https://seeklogo.com/images/O/onesignal-logo-5D1466978B-seeklogo.com.png" alt="OneSignal"/></div>
+        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"/></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Carousel -->
+  <section id="testimonials" data-aos="fade-up">
+    <div class="section-title">What Clients Say</div>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide testimonial-card">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
+          <p>"Saad transformed our ad spend into explosive growth!"</p>
+          <strong>— Ahmed R.</strong>
+        </div>
+        <div class="swiper-slide testimonial-card">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
+          <p>"His CRM automations save us hours every week."</p>
+          <strong>— Lisa W.</strong>
+        </div>
+        <div class="swiper-slide testimonial-card">
+          <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="Client">
+          <p>"Best investment we made in ad strategy."</p>
+          <strong>— Jake M.</strong>
+        </div>
+        <div class="swiper-slide testimonial-card">
+          <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="Client">
+          <p>"From zero to $50K/month in 6 weeks!"</p>
+          <strong>— Sana J.</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" data-aos="fade-up">
+    <div class="section-title">Get In Touch</div>
+    <form action="https://formspree.io/f/xkgbvywj" method="POST" onsubmit="setTimeout(()=>window.location.href='#',1000);">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Your Name" required/>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="Your Email" required/>
+      <label for="msg">Message</label>
+      <textarea id="msg" name="message" rows="5" placeholder="What can I help you with?" required></textarea>
+      <button type="submit">🚀 Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer data-aos="fade-up">
+    <p>© 2025 Saad Jawed. All Rights Reserved.</p>
+    <div class="footer-nav">
+      <a href="#about">About</a> |
+      <a href="#services">Services</a> |
+      <a href="#contact">Contact</a> |
+      <a href="https://www.upwork.com/freelancers/~01f9ec472532506f7f" target="_blank">Upwork</a>
+    </div>
+    <p>Based in Pakistan — Working with Clients Worldwide 🌍</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    // Preloader
+    window.addEventListener('load', ()=>document.getElementById('preloader').style.display='none');
+
+    // Custom cursor
+    const cursor=document.getElementById('cursor');
+    document.addEventListener('mousemove',e=>{
+      cursor.style.left=e.pageX+'px';
+      cursor.style.top=e.pageY+'px';
+    });
+    window.addEventListener('scroll',()=>{
+      cursor.style.transform='translate(-50%,-50%) scale(0.8)';
+      setTimeout(()=>cursor.style.transform='translate(-50%,-50%) scale(1)',200);
+    });
+
+    // Typed.js
+    new Typed('.typed-text', {
+      strings: ['Growth Marketer','Shopify & CRM Expert','Driving 3.5x ROAS','Scaling DTC Brands'],
+      typeSpeed:60, backSpeed:30, loop:true
+    });
+
+    // AOS init
+    AOS.init({ once:true, duration:800 });
+
+    // Scroll-spy nav
+    const sections=document.querySelectorAll('section'), navLinks=document.querySelectorAll('nav a');
+    window.addEventListener('scroll',()=>{
+      let current='';
+      sections.forEach(sec=>{ if(scrollY>=sec.offsetTop-100) current=sec.getAttribute('id'); });
+      navLinks.forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href')===`#${current}`);
+      });
+    });
+
+    // Swiper carousels
+    new Swiper('.swiper-container',{
+      loop:true, autoplay:{ delay:3000 }, slidesPerView:'auto', spaceBetween:20
+    });
+
+    // Animate metrics on scroll
+    const metrics = document.querySelectorAll('.metric-card');
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('visible');
+      });
+    },{ threshold:0.5 });
+    metrics.forEach(m=>obs.observe(m));
+  </script>
 </body>
 </html>
