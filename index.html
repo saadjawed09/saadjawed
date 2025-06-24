@@ -4,26 +4,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Saad Jawed | Growth & CRM Strategist</title>
+  <meta name="description" content="Growth marketer specializing in Shopify, CRM automations & paid ads. Scaled brands to $100K+/mo with 3.5× ROI.">
+  <link rel="icon" href="favicon.ico">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <!-- AOS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <!-- Swiper -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-  <!-- Typed.js -->
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <!-- Google Fonts & AOS CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 
   <style>
     :root {
       --bg: #0a0a0a;
       --fg: #fff;
       --accent: #ffd700;
-      --card: #1a1a1a;
+      --card: #222;
       --shadow: rgba(0,0,0,0.5);
-      --vgap: 80px;
+      --vgap: 64px;
       --hpad: 5vw;
     }
+    /* RESET & GLOBAL */
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body {
@@ -31,412 +29,461 @@
       background:var(--bg);
       color:var(--fg);
       overflow-x:hidden;
-      position:relative;
-    }
-    /* Preloader */
-    #preloader {
-      position:fixed; top:0; left:0; right:0; bottom:0;
-      background:var(--bg); display:flex;
-      align-items:center; justify-content:center; z-index:9999;
-    }
-    #preloader div {
-      width:50px; height:50px; border:5px solid var(--accent);
-      border-top-color:transparent; border-radius:50%;
-      animation:spin 1s linear infinite;
-    }
-    @keyframes spin { to{transform:rotate(360deg);} }
-    /* Custom cursor */
-    #cursor {
-      position:fixed; width:18px; height:18px; border-radius:50%;
-      background:var(--accent); pointer-events:none;
-      mix-blend-mode:difference; transform:translate(-50%,-50%);
-      transition:transform .15s ease-out; z-index:9999;
-    }
-    @media(hover:none){ #cursor{display:none;} }
-
-    /* Full-width + padding */
-    header, section, .swiper-container {
-      width:100%; max-width:none;
-      padding:var(--vgap) var(--hpad);
     }
     body::before {
-      content:""; position:fixed; top:0; left:0;
-      width:100%; height:100%;
+      content:""; position:fixed; inset:0;
       background:url('https://www.transparenttextures.com/patterns/stardust.png');
-      opacity:0.04; z-index:-1;
+      opacity:0.04; pointer-events:none; z-index:-1;
     }
+    a { color:inherit; text-decoration:none; }
+    img { display:block; }
 
-    /* Nav */
+    /* NAV */
     nav {
-      position:sticky; top:0; display:flex; justify-content:center;
-      gap:2rem; padding:1rem var(--hpad);
-      background:var(--bg); z-index:1000; border-bottom:1px solid #333;
+      position:sticky; top:0; background:var(--bg);
+      display:flex; justify-content:center; gap:1rem;
+      padding:1rem var(--hpad); border-bottom:1px solid #333;
+      z-index:1000;
     }
     nav a {
-      color:var(--fg); text-decoration:none; font-weight:500; position:relative;
-      padding:.25rem; text-align:center;
+      padding:0.25rem; font-weight:500; position:relative;
     }
     nav a.active::after {
-      content:''; position:absolute; left:0; bottom:0;
+      content:''; position:absolute; bottom:0; left:0;
       width:100%; height:2px; background:var(--accent);
     }
     nav a:hover { color:var(--accent); }
 
-    /* Hero */
+    /* HERO */
     header {
-      min-height:100vh; display:flex; flex-direction:column;
+      min-height:90vh; display:flex; flex-direction:column;
       justify-content:center; align-items:center; text-align:center;
-      background:linear-gradient(135deg,#111,#222) no-repeat center/cover;
-      background-attachment:fixed;
+      background:linear-gradient(135deg,#111,#222) fixed;
+      padding:0 var(--hpad); margin-bottom:var(--vgap);
+      opacity:0; animation:fadeIn 1s forwards 0.2s;
     }
+    @keyframes fadeIn { to { opacity:1; } }
+    @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-15px); } }
     header img {
-      width:140px; border-radius:50%;
+      width:150px; height:150px; border-radius:50%; object-fit:cover;
       box-shadow:0 10px 30px var(--shadow);
       margin-bottom:1rem; animation:float 3s ease-in-out infinite;
     }
-    @keyframes float {
-      0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}
-    }
     header h1 {
-      font-family:'Playfair Display',serif; font-size:3.5rem;
-      color:var(--accent); margin-bottom:.5rem;
-      text-shadow:0 4px 10px var(--shadow);
-      text-align:center;
+      font-family:'Playfair Display',serif; font-size:3rem;
+      color:var(--accent); text-shadow:0 4px 10px var(--shadow);
+      margin-bottom:0.5rem;
+    }
+    .subhead { color:#ccc; font-size:1rem; margin-bottom:0.75rem; }
+    .badges {
+      display:flex; gap:0.75rem; margin-bottom:1rem;
+    }
+    .badge {
+      background:var(--accent); color:#000;
+      padding:0.4rem 0.8rem; border-radius:20px;
+      font-size:0.85rem; font-weight:500;
     }
     .typed-text {
-      font-size:1.2rem; font-weight:700; color:var(--accent);
-      border-right:2px solid var(--accent);
-      white-space:nowrap; overflow:hidden;
-      margin-bottom:1.5rem; text-align:center;
+      font-size:1.1rem; font-weight:700; color:var(--accent);
+      white-space:nowrap; overflow:hidden; border-right:2px solid var(--accent);
+      margin-bottom:1rem;
     }
+    .typed-text .typed-cursor { display:none !important; }
     .cta {
-      padding:1rem 2rem; background:var(--accent); color:#000;
-      font-weight:700; border:none; border-radius:8px;
+      margin-top:12px;
+      padding:0.9rem 1.8rem;
+      background:var(--accent); color:#000;
+      font-weight:700; border-radius:8px;
       box-shadow:0 5px 15px var(--shadow);
-      transition:transform .3s,box-shadow .3s;
-      text-align:center;
+      transition:transform 0.3s;
+      display:inline-block;
     }
-    .cta:hover {
-      transform:scale(1.05); box-shadow:0 8px 20px var(--shadow);
-    }
+    .cta:hover { transform:scale(1.05); }
 
-    /* Section titles */
+    /* SECTION TITLES */
     .section-title {
-      font-size:2.5rem; color:var(--accent);
-      font-family:'Playfair Display',serif;
-      margin-bottom:calc(var(--vgap)/2); text-align:center;
+      font-family:'Playfair Display',serif; font-size:2rem;
+      color:var(--accent); text-align:center; margin-bottom:32px;
+      position:relative;
     }
     .section-title::after {
-      content:''; display:block; width:60px; height:3px;
-      background:var(--accent); margin:12px auto 0;
+      content:''; display:block;
+      width:50px; height:3px; background:var(--accent);
+      margin:8px auto 0;
     }
 
-    /* About */
-    #about p { font-size:1.1rem; line-height:1.6; color:#ddd; text-align:center; }
+    /* SECTION WRAPPER */
+    section {
+      padding:0 var(--hpad);
+      margin-bottom:var(--vgap);
+    }
 
-    /* Services */
+    /* ABOUT */
+    #about p,
+    #about ul {
+      text-align:center; color:#ddd; margin-bottom:24px;
+    }
+    #about ul {
+      list-style:disc; display:inline-block;
+      text-align:left; padding-left:1rem;
+      line-height:1.6;
+    }
+
+    /* SERVICES */
     .services-grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:30px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:24px;
     }
     .service-card {
-      background:var(--card); padding:1.5rem; border-radius:12px;
-      box-shadow:0 5px 20px var(--shadow);
-      transition:transform .3s,box-shadow .3s;
-      text-align:center;
+      background:var(--card); padding:1.5rem;
+      border-radius:12px; box-shadow:0 5px 20px var(--shadow);
+      text-align:center; transition:transform 0.3s;
     }
-    .service-card:hover {
-      transform:translateY(-10px);
-      box-shadow:0 8px 25px rgba(255,215,0,0.3);
+    .service-card:hover { transform:translateY(-6px); }
+    .service-card svg {
+      width:32px; height:32px; margin-bottom:0.75rem;
+      fill:var(--accent);
     }
-    .service-card h3 { margin-bottom:.75rem; color:var(--accent); }
+    .service-card h3 { color:var(--accent); margin-bottom:0.5rem; }
+    .service-card p { color:#ccc; }
 
-    /* Projects */
+    /* PROJECTS */
     .projects-grid {
-      display:flex; flex-wrap:wrap; gap:30px; justify-content:center;
+      display:flex; flex-wrap:wrap;
+      gap:24px; justify-content:center;
     }
     .project-card {
-      background:var(--card); border-radius:12px; overflow:hidden;
-      box-shadow:0 5px 20px var(--shadow);
-      transition:transform .3s; flex:1 1 300px; max-width:400px;
+      position:relative; overflow:hidden;
+      border-radius:12px; box-shadow:0 5px 20px var(--shadow);
+      flex:1 1 280px; max-width:380px;
+      transition:transform 0.3s;
     }
-    .project-card:hover { transform:translateY(-8px); }
-    .project-card img { width:100%; display:block; }
-    .project-card .info {
-      padding:1rem; text-align:center;
+    .project-card:hover { transform:translateY(-6px); }
+    .project-card img { width:100%; height:auto; }
+    .project-card::after {
+      content:'View Details'; position:absolute; inset:0;
+      background:rgba(0,0,0,0.6); color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; transition:opacity 0.3s; font-weight:600;
     }
-    .project-card h4 { color:var(--accent); margin-bottom:.5rem; }
+    .project-card:hover::after { opacity:1; }
+    .project-card .info { padding:1rem; text-align:center; margin-bottom:24px; }
+    .project-card h4 { color:var(--accent); margin-bottom:0.5rem; }
     .project-card p { color:#ccc; }
 
-    /* Metrics */
+    /* METRICS */
     .metrics-grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:25px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+      gap:24px;
     }
     .metric-card {
-      background:var(--card); padding:1.5rem; border-radius:12px;
-      box-shadow:0 5px 20px var(--shadow);
-      transition:transform .3s; text-align:center;
+      background:var(--card); padding:1.25rem;
+      border-radius:12px; box-shadow:0 5px 20px var(--shadow);
+      text-align:center; transition:transform 0.3s;
     }
-    .metric-card:hover { transform:translateY(-8px) scale(1.03); }
-    .metric-card h3 { font-size:2rem; color:var(--accent); }
-    .metric-card p { margin-top:.5rem; color:#ccc; }
+    .metric-card:hover { transform:translateY(-6px) scale(1.02); }
+    .metric-card h3 {
+      font-size:1.75rem; color:var(--accent); margin-bottom:0.4rem;
+    }
+    .metric-card p { color:#ccc; }
 
-    /* Why Choose Me */
+    /* WHY CHOOSE ME */
     #why {
-      display:grid; grid-template-columns:1fr 1fr; gap:40px;
-      text-align:center;
+      display:flex; flex-wrap:wrap;
+      justify-content:center; align-items:flex-start;
     }
     .compare-box {
-      background:var(--card); padding:1.5rem; border-radius:12px;
+      background:var(--card);
+      flex:1 1 300px; max-width:420px;
+      padding:1.5rem; border-radius:12px;
       box-shadow:0 5px 20px var(--shadow);
-      transition:transform .3s;
+      margin:0 12px; transition:transform 0.3s;
     }
-    .compare-box:hover { transform:translateY(-8px); }
-    .compare-box h4 { color:var(--accent); margin-bottom:.75rem; }
+    .compare-box:hover { transform:translateY(-6px); }
+    .compare-box h4 {
+      color:var(--accent); text-align:center; margin-bottom:0.75rem;
+    }
     .compare-box ul {
-      margin:0 auto; padding-left:1em; text-align:left; color:#ccc;
-    }
-    @media(max-width:768px){ #why{grid-template-columns:1fr;} }
-
-    /* Carousels */
-    .swiper-container { overflow:visible; }
-    .swiper-slide {
-      background:var(--card); padding:1rem; border-radius:12px;
-      box-shadow:0 5px 20px var(--shadow);
-      display:flex; align-items:center; justify-content:center;
-    }
-    .swiper-slide img {
-      width:60px; filter:grayscale(100%);
-      transition:filter .3s, transform .3s;
-    }
-    .swiper-slide:hover img {
-      filter:grayscale(0); transform:scale(1.1);
-    }
-    .testimonial-card p { font-style:italic; color:#ccc; margin:1rem 0; text-align:center; }
-
-    /* Contact */
-    #contact form {
-      max-width:500px; margin:2rem auto; text-align:left;
-    }
-    #contact label {
-      display:block; margin-top:1rem; color:#ddd; font-size:.9rem;
-    }
-    #contact input, #contact textarea {
-      width:100%; padding:.75rem; border:none; border-radius:8px;
-      background:#222; color:#fff; margin-top:.5rem;
-    }
-    #contact button {
-      margin-top:1rem; background:var(--accent); color:#000;
-      border:none; padding:1rem 2rem; font-weight:700; border-radius:8px;
-      cursor:pointer; transition:transform .3s, box-shadow .3s;
-      display:block; margin-left:auto; margin-right:auto;
-    }
-    #contact button:hover {
-      transform:scale(1.05); box-shadow:0 5px 15px var(--shadow);
+      padding-left:1.2rem; color:#ccc; line-height:1.6;
     }
 
-    /* Footer */
+    /* TESTIMONIALS */
+    .testimonial-container {
+      display:flex; flex-wrap:wrap;
+      justify-content:center; gap:24px;
+      margin:0 var(--hpad);
+    }
+    .testimonial-card {
+      background:var(--card);
+      min-width:300px; flex:0 0 300px;
+      border-radius:12px; box-shadow:0 5px 20px var(--shadow);
+      padding:1.2rem; text-align:center;
+      display:flex; flex-direction:column; align-items:center; gap:0.6rem;
+    }
+    .testimonial-card img {
+      width:60px; height:60px; border-radius:50%;
+      object-fit:cover;
+    }
+    .testimonial-card p { font-style:italic; color:#ccc; }
+    .testimonial-card strong { color:#fff; }
+
+    /* CONTACT */
+    #contact form { max-width:580px; margin:1rem auto; }
+    .field { position:relative; margin-top:1.2rem; }
+    input,textarea {
+      width:100%; padding:0.65rem; background:transparent;
+      border:1px solid #444; border-radius:4px; color:#fff; outline:none;
+    }
+    label {
+      position:absolute; left:0.65rem; top:0.65rem;
+      color:#777; pointer-events:none; transition:0.2s; font-size:1rem;
+    }
+    input:focus+label,
+    input:not(:placeholder-shown)+label,
+    textarea:focus+label,
+    textarea:not(:placeholder-shown)+label {
+      top:-0.45rem; font-size:0.75rem; color:var(--accent);
+    }
+    button {
+      margin-top:1.8rem; background:var(--accent); color:#000;
+      border:none; padding:0.85rem 1.8rem; border-radius:8px;
+      font-weight:700; cursor:pointer; transition:transform 0.3s;
+    }
+    button:hover { transform:scale(1.05); }
+
+    /* FOOTER */
     footer {
-      background:var(--card); padding:3rem var(--hpad);
-      text-align:center; color:#aaa; font-size:.9rem; margin-top:var(--vgap);
+      background:var(--card); padding:32px var(--hpad);
+      text-align:center; color:#aaa; font-size:0.85rem;
     }
-    footer .footer-nav a {
-      color:#ccc; margin:0 8px; text-decoration:none;
-    }
-    footer .footer-nav a:hover { color:var(--accent); }
+    footer a { color:#ccc; margin:0 0.5rem; font-weight:500; }
+    footer a:hover { color:var(--accent); }
   </style>
 </head>
 <body>
-  <!-- Preloader -->
-  <div id="preloader"><div></div></div>
-  <!-- Custom Cursor -->
-  <div id="cursor"></div>
-  <!-- Navigation -->
+
+  <!-- NAVIGATION -->
   <nav>
     <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#projects">Projects</a>
     <a href="#metrics">Results</a>
     <a href="#why">Why Me</a>
-    <a href="#tools">Tools</a>
     <a href="#testimonials">Testimonials</a>
     <a href="#contact">Contact</a>
   </nav>
 
-  <!-- Hero -->
+  <!-- HERO -->
   <header data-aos="fade-in">
-    <img src="https://i.ibb.co/GQMB3FLX/1648319426145.jpg" alt="Saad Jawed avatar">
+    <img src="https://i.ibb.co/GQMB3FLX/1648319426145.jpg" alt="Saad Jawed" loading="lazy">
     <h1>Saad Jawed</h1>
+    <div class="subhead">Upwork Top-Rated • Level 2 Seller • 100+ Clients</div>
+    <div class="badges">
+      <div class="badge">Top Rated</div>
+      <div class="badge">Rising Talent</div>
+    </div>
     <div class="typed-text"></div>
-    <a href="#contact" class="cta">🚀 Let’s Get Started</a>
+    <a href="#contact" class="cta">Book Free 15-min Call</a>
   </header>
 
-  <!-- About -->
+  <!-- ABOUT ME -->
   <section id="about" data-aos="fade-up">
     <div class="section-title">About Me</div>
-    <p>I’m a growth strategist specializing in Shopify stores, Meta & TikTok paid ads, and CRM automations. I manage $100K+/mo in ad spend, drive 3.5× ROAS, and build retention workflows for LTV.</p>
+    <p>Here’s how I make growth predictable:</p>
+    <ul>
+      <li>Manage $100K+/mo ad spend across Meta, TikTok & Snapchat.</li>
+      <li>Scale Shopify stores to $100K+/mo with 3.5× ROI.</li>
+      <li>Automate HubSpot & Klaviyo flows boosting retention +45%.</li>
+    </ul>
   </section>
 
-  <!-- Services -->
-  <section id="services">
-    <div class="section-title" data-aos="fade-up">Services</div>
+  <!-- SERVICES -->
+  <section id="services" data-aos="fade-up">
+    <div class="section-title">Services</div>
     <div class="services-grid">
-      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+      <div class="service-card">
+        <svg viewBox="0 0 24 24"><path d="M3 4h4v16H3zM17 4h4v16h-4zM10 4h4v16h-4z"/></svg>
         <h3>Meta & TikTok Ads</h3>
-        <p>Cold funnels to high-ROI retargeting.</p>
+        <p>Cold funnels → high-ROI retargeting.</p>
       </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+      <div class="service-card">
+        <svg viewBox="0 0 24 24"><path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z"/></svg>
         <h3>Shopify Growth</h3>
-        <p>Store builds, theme edits & CRO.</p>
+        <p>Store setups, CRO & sales flows.</p>
       </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+      <div class="service-card">
+        <svg viewBox="0 0 24 24"><path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z"/></svg>
         <h3>Sales Funnels</h3>
-        <p>Landing pages, email flows & upsells.</p>
+        <p>Landing pages, email & upsells.</p>
       </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+      <div class="service-card">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 22l-6-4-6 4 2.5-8.5L2 9h7z"/></svg>
         <h3>CRM Automations</h3>
-        <p>HubSpot & Klaviyo workflows.</p>
-      </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="500">
-        <h3>WhatsApp & Email</h3>
-        <p>Personalized messaging campaigns.</p>
-      </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="600">
-        <h3>Analytics</h3>
-        <p>Data insights to optimize funnels.</p>
+        <p>HubSpot & Klaviyo workflows that retain.</p>
       </div>
     </div>
   </section>
 
-  <!-- Projects -->
+  <!-- PROJECT HIGHLIGHTS -->
   <section id="projects" data-aos="fade-up">
     <div class="section-title">Project Highlights</div>
     <div class="projects-grid">
       <div class="project-card">
-        <img src="https://i.ibb.co/CN47wTt/Chat-GPT-Image-Jun-22-2025-01-02-44-AM.png" alt="Project 1">
+        <img src="https://i.ibb.co/CN47wTt/Chat-GPT-Image-Jun-22-2025-01-02-44-AM.png" alt="Project 1" loading="lazy">
         <div class="info">
-          <h4>3.2× ROAS in 60 Days</h4>
-          <p>Scaled a launch to $30K+ monthly revenue.</p>
+          <h4>Challenge → Result</h4>
+          <p>Scaled launch to $30K+/mo revenue (3.2× ROAS).</p>
         </div>
       </div>
       <div class="project-card">
-        <img src="https://i.ibb.co/Hfp3nDcX/Chat-GPT-Image-Jun-22-2025-01-02-53-AM.png" alt="Project 2">
+        <img src="https://i.ibb.co/Hfp3nDcX/Chat-GPT-Image-Jun-22-2025-01-02-53-AM.png" alt="Project 2" loading="lazy">
         <div class="info">
-          <h4>$6.5K Spent → 4.23 ROAS</h4>
-          <p>213 purchases at $4.88 CPA in 2 weeks.</p>
+          <h4>Challenge → Result</h4>
+          <p>213 purchases @ $4.88 CPA (4.23× ROAS).</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Results & Metrics -->
+  <!-- RESULTS & METRICS -->
   <section id="metrics" data-aos="fade-up">
     <div class="section-title">Results & Metrics</div>
     <div class="metrics-grid">
-      <div class="metric-card"><h3>$100K+</h3><p>Ad Budget</p></div>
-      <div class="metric-card"><h3>3.5×</h3><p>Avg. ROAS</p></div>
-      <div class="metric-card"><h3>$250K</h3><p>Sales Generated</p></div>
-      <div class="metric-card"><h3>45%</h3><p>Retention Growth</p></div>
+      <div class="metric-card"><h3 data-target="100000">0</h3><p>Monthly Ad Budget</p></div>
+      <div class="metric-card"><h3 data-target="3.5">0</h3><p>Average ROI</p></div>
+      <div class="metric-card"><h3 data-target="250000">0</h3><p>Revenue Generated</p></div>
+      <div class="metric-card"><h3 data-target="45">0</h3><p>Retention Growth (%)</p></div>
     </div>
   </section>
 
-  <!-- Why Choose Me -->
+  <!-- WHY CHOOSE ME -->
   <section id="why" data-aos="fade-up">
     <div class="section-title">Why Choose Me?</div>
     <div class="compare-box">
       <h4>Others</h4>
-      <ul><li>Generic ad setups</li><li>Basic edits</li><li>Slow support</li></ul>
+      <ul>
+        <li>One-size-fits-all</li>
+        <li>Minimal support</li>
+        <li>No retention focus</li>
+      </ul>
     </div>
     <div class="compare-box">
       <h4>Me</h4>
-      <ul><li>Custom, data-driven</li><li>CRO & retention focus</li><li>24-hr support</li></ul>
+      <ul>
+        <li>Custom, data-driven</li>
+        <li>24-hr rapid support</li>
+        <li>CRO & retention built-in</li>
+      </ul>
     </div>
   </section>
 
-  <!-- Tech & Tools Carousel -->
-  <section id="tools" data-aos="fade-up">
-    <div class="section-title">Tech & Tools</div>
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Meta_Platforms_Logo_2021.svg" alt="Meta"></div>
-        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/6/64/HubSpot_Logo.svg" alt="HubSpot"></div>
-        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Shopify_logo_2018.svg" alt="Shopify"></div>
-        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Mailchimp_Logo_2018.svg" alt="Mailchimp"></div>
-        <div class="swiper-slide"><img src="https://seeklogo.com/images/O/onesignal-logo-5D1466978B-seeklogo.com.png" alt="OneSignal"></div>
-        <div class="swiper-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Carousel -->
+  <!-- TESTIMONIALS -->
   <section id="testimonials" data-aos="fade-up">
     <div class="section-title">What Clients Say</div>
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide testimonial-card">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
-          <p>"Saad transformed our ad spend into explosive growth!"</p>
-          <strong>— Ahmed R.</strong>
-        </div>
-        <div class="swiper-slide testimonial-card">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
-          <p>"His CRM automations save us hours every week."</p>
-          <strong>— Lisa W.</strong>
-        </div>
-        <div class="swiper-slide testimonial-card">
-          <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="">
-          <p>"Best investment we made in ad strategy."</p>
-          <strong>— Jake M.</strong>
-        </div>
-        <div class="swiper-slide testimonial-card">
-          <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="">
-          <p>"From zero to $50K/month in 6 weeks!"</p>
-          <strong>— Sana J.</strong>
-        </div>
+    <div class="testimonial-container">
+      <div class="testimonial-card">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="" loading="lazy">
+        <p>"Saad drove our CPA down 25% in 2 weeks."</p>
+        <strong>— Javier, CEO</strong>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="" loading="lazy">
+        <p>"Our Shopify rev jumped from $8K → $52K."</p>
+        <strong>— Mia, Founder</strong>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="" loading="lazy">
+        <p>"Best ad spend ROI we've ever seen."</p>
+        <strong>— Leo, CMO</strong>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="" loading="lazy">
+        <p>"CRM automations saved us 6 hrs/week."</p>
+        <strong>— Nora, Growth Lead</strong>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://randomuser.me/api/portraits/men/24.jpg" alt="" loading="lazy">
+        <p>"Instant results. Highly recommend."</p>
+        <strong>— Adam, E-comm</strong>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
+  <!-- CONTACT -->
   <section id="contact" data-aos="fade-up">
-    <div class="section-title">Get In Touch</div>
-    <form action="https://formspree.io/f/xkgbvywj" method="POST" onsubmit="setTimeout(()=>window.location.href='#',1000);">
-      <label>Name</label><input name="name" type="text" placeholder="Your Name" required>
-      <label>Email</label><input name="email" type="email" placeholder="Your Email" required>
-      <label>Message</label><textarea name="message" rows="5" placeholder="How can I help?" required></textarea>
-      <button type="submit">🚀 Send Your Message</button>
+    <div class="section-title">Get My Free Growth Audit</div>
+    <form action="https://formspree.io/f/xkgbvywj" method="POST">
+      <div class="field">
+        <input name="name" type="text" placeholder=" " required>
+        <label>Name</label>
+      </div>
+      <div class="field">
+        <input name="email" type="email" placeholder=" " required>
+        <label>Email</label>
+      </div>
+      <div class="field">
+        <textarea name="message" rows="4" placeholder=" " required></textarea>
+        <label>Your Challenge</label>
+      </div>
+      <button type="submit">🚀 Send Audit Request</button>
     </form>
   </section>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer data-aos="fade-up">
-    <p>© 2025 Saad Jawed. All Rights Reserved.</p>
     <div class="footer-nav">
-      <a href="#about">About</a> | <a href="#services">Services</a> | <a href="#contact">Contact</a> | <a href="https://www.upwork.com/freelancers/~01f9ec472532506f7f" target="_blank">Upwork</a>
+      <a href="#about">About</a> |
+      <a href="#services">Services</a> |
+      <a href="#contact">Contact</a> |
+      <a href="/privacy-policy.html">Privacy Policy</a>
     </div>
-    <p>Based in Pakistan — Working with Clients Worldwide 🌍</p>
+    <p>© 2025 Saad Jawed. Based in Pakistan, serving clients worldwide.</p>
+    <div class="social">
+      <a href="https://www.linkedin.com/in/msdjawed/" target="_blank">LinkedIn</a> |
+      <a href="https://www.upwork.com/freelancers/~01f9ec472532506f7f" target="_blank">Upwork</a>
+    </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- SCRIPTS: AOS & Typed.js -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script>
-    // Preloader
-    window.addEventListener('load',()=>document.getElementById('preloader').style.display='none');
-    // Cursor
-    const cursor=document.getElementById('cursor');
-    document.addEventListener('mousemove',e=>{cursor.style.left=e.pageX+'px';cursor.style.top=e.pageY+'px';});
-    window.addEventListener('scroll',()=>{cursor.style.transform='translate(-50%,-50%) scale(.8)';setTimeout(()=>cursor.style.transform='translate(-50%,-50%) scale(1)',200);});
-    // Typed.js
-    new Typed('.typed-text',{strings:['Scaling Brands to $100K+/mo','3.5× ROAS on Cold Traffic','Automating CRM for LTV'],typeSpeed:50,backSpeed:25,loop:true});
-    // AOS
-    AOS.init({once:true,duration:800});
-    // Scroll-spy
-    const secs=document.querySelectorAll('section'), links=document.querySelectorAll('nav a');
-    window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(scrollY>=s.offsetTop-120)cur=s.id;});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===`#${cur}`));});
-    // Swiper
-    document.querySelectorAll('.swiper-container').forEach(el=>new Swiper(el,{loop:true,autoplay:{delay:3000},breakpoints:{0:{slidesPerView:1,spaceBetween:10},600:{slidesPerView:2,spaceBetween:15},900:{slidesPerView:3,spaceBetween:20}}}));
+    // Typed.js Initialization
+    new Typed('.typed-text', {
+      strings: ['Scaling Brands to $100K+/mo', '3.5× ROI on Cold Traffic', 'Automating CRM for Lifetime Value'],
+      typeSpeed: 50,
+      backSpeed: 25,
+      loop: true,
+      showCursor: false
+    });
+
+    // AOS Init
+    AOS.init({ once: true, duration: 600 });
+
+    // Scroll-spy Nav
+    const secs = document.querySelectorAll('section'),
+          navs = document.querySelectorAll('nav a');
+    window.addEventListener('scroll', () => {
+      let curr = '';
+      secs.forEach(s => { if (window.scrollY >= s.offsetTop - 120) curr = s.id; });
+      navs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${curr}`));
+    });
+
+    // Count-up Metrics
+    document.querySelectorAll('.metric-card h3').forEach(el => {
+      const target = parseFloat(el.dataset.target),
+            isFloat = target % 1 !== 0;
+      let count = 0,
+          step = target / 100,
+          fmt = v => isFloat ? v.toFixed(1) : Math.round(v).toLocaleString();
+      const iv = setInterval(() => {
+        count += step;
+        if (count >= target) { count = target; clearInterval(iv); }
+        el.textContent = fmt(count);
+      }, 20);
+    });
   </script>
 </body>
 </html>
